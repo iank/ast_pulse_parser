@@ -1,5 +1,6 @@
 import pulse
 import unittest
+import numpy as np
 
 class ParseTest(unittest.TestCase):
     def test_pulse_equality(self):
@@ -8,6 +9,10 @@ class ParseTest(unittest.TestCase):
     def test_simple_pulse(self):
         text = "pulse(3, 2)"
         self.assertEqual(pulse.parse(text), [pulse.Pulse(3, 2)])
+
+    def test_pulse_with_np(self):
+        text = "pulse(3, np.linspace(0, 10, 10)[4])"
+        self.assertEqual(pulse.parse(text), [pulse.Pulse(3, np.linspace(0, 10, 10)[4])])
 
     def test_sum_of_pulses(self):
         text = "pulse(3, 2) + pulse(1, 4) + pulse(3, 8)"

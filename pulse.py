@@ -1,4 +1,5 @@
 import ast
+import numpy
 
 ####
 # We accept calls to pulse, or sums of calls to pulse. Arguments can be
@@ -38,7 +39,8 @@ def callToPulse(call):
 
 def evalArg(arg):
     """Evaluates an AST node as an Expression"""
-    return eval(compile(ast.Expression(arg), filename='', mode='eval'))
+    return eval(compile(ast.Expression(arg), filename='', mode='eval'),
+                {'np': numpy})
 
 def extractCalls(expr):
     """Extract calls to pulse().
