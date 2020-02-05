@@ -14,7 +14,7 @@ def parse(text):
     assert isinstance(expr, ast.Expression), "Top level isn't Expression"
 
     calls = extractCalls(expr.body)
-    pulses = map(callToPulse, calls)
+    pulses = list(map(callToPulse, calls))
 
     return pulses
 
