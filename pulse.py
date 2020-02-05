@@ -13,7 +13,6 @@ def parse(text):
     assert isinstance(expr, ast.Expression), "Top level isn't Expression"
 
     calls = extractCalls(expr.body)
-
     pulses = map(callToPulse, calls)
 
     return pulses
@@ -56,7 +55,7 @@ def extractCalls(expr):
     if isinstance(expr, ast.Call):
         return [expr]
     elif isinstance(expr, ast.BinOp):
-        #TODO assert operation is +
+        assert isinstance(expr.op, ast.Add), "Only addition in top level"
         # The sum just flattens the list so we get [1,2,3,4] instead of
         # [[1,2],[3,4]] for "(1+2)+(3+4)"
         return sum(
